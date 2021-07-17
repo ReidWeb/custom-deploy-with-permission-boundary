@@ -1,0 +1,92 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+	{
+	  "Action": [
+		"kms:*",
+		"lambda:*",
+		"logs:*"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Condition": {
+		"StringEquals": {
+		  "aws:ResourceTag/my_boundary_tag": "testing"
+		}
+	  },
+	  "Action": [
+		"*"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Condition": {
+		"StringEquals": {
+		  "aws:RequestTag/my_boundary_tag": "testing"
+		}
+	  },
+	  "Action": [
+		"*"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Condition": {
+		"StringEquals": {
+		  "s3:ExistingObjectTag/my_boundary_tag": "testing"
+		}
+	  },
+	  "Action": [
+		"s3:*Object*"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Condition": {
+		"StringEquals": {
+		  "s3:RequestObjectTag/my_boundary_tag": "testing"
+		}
+	  },
+	  "Action": [
+		"s3:*Object*"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Condition": {
+		"StringEquals": {
+		  "iam:ResourceTag/my_boundary_tag": "testing"
+		}
+	  },
+	  "Action": [
+		"iam:*",
+		"sts:AssumeRole"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	},
+	{
+	  "Action": [
+		"cloudwatch:PutMetricData",
+		"ec2:Describe*",
+		"ec2:Get*",
+		"events:DescribeRule",
+		"events:PutRule",
+		"events:PutTargets",
+		"iam:Get*",
+		"iam:List*",
+		"s3:List*",
+		"xray:PutTelemetryRecords",
+		"xray:PutTraceSegments"
+	  ],
+	  "Resource": "*",
+	  "Effect": "Allow"
+	}
+  ]
+}
